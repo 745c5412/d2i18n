@@ -17,7 +17,7 @@ func TestParse(t *testing.T) {
 	reader := openFixture(t)
 	defer func() { _ = reader.Close() }()
 
-	_, err := Parse(reader)
+	_, err := Parse(NewReader(reader))
 	if err != nil {
 		t.Errorf("Parse failed: %v", err)
 	}
@@ -27,7 +27,7 @@ func Test_i18n_GetNamedText(t *testing.T) {
 	reader := openFixture(t)
 	defer func() { _ = reader.Close() }()
 
-	i18n, err := Parse(reader)
+	i18n, err := Parse(NewReader(reader))
 	if err != nil {
 		t.Fatalf("Parse failed: %v", err)
 	}

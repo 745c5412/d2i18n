@@ -1,9 +1,5 @@
 package d2i18n
 
-import (
-	"io"
-)
-
 // I18n is the interface for accessing i18n texts for Dofus 2
 type I18n interface {
 	GetUndiacriticalText(int32) (string, bool, error)
@@ -22,10 +18,9 @@ type i18n struct {
 
 // Parse parses a I18n files.
 // Since it uses Seek() to retrieve the position, ReadSeekers like bytes.Buffer might not work
-func Parse(r io.ReadSeeker) (I18n, error) {
-	reader := NewReader(r)
+func Parse(r Reader) (I18n, error) {
 	i18n := &i18n{
-		reader,
+		r,
 		map[int32]int32{}, map[int32]int32{},
 		map[string]int32{}, map[int32]int{},
 	}
